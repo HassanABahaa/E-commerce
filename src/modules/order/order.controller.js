@@ -127,10 +127,10 @@ export const createOrder = async (req, res, next) => {
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"], // card = visa
-      mode: "payment", // payment , subscription
-      success_url: process.env.SUCCESS_URL, // from frontend
-      cancel_url: process.env.CANCEL_URL, // from frontend
+      payment_method_types: ["card"],
+      mode: "payment",
+      success_url: process.env.SUCCESS_URL,
+      cancel_url: process.env.CANCEL_URL,
       line_items: order.products.map((product) => {
         return {
           price_data: {

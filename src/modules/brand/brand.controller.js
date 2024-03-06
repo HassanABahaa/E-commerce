@@ -5,7 +5,7 @@ import cloudinary from "../../utils/cloud.js";
 
 export const createBrand = async (req, res, next) => {
   // check categories
-  const { categories, name } = req.body; // [ "asdfadf" , "atwqerwe"]
+  const { categories, name } = req.body;
   categories.forEach(async (categoryId) => {
     const category = await Category.findById(categoryId);
     if (!category)
@@ -76,13 +76,6 @@ export const deleteBrand = async (req, res, next) => {
 };
 
 export const getBrand = async (req, res, next) => {
-  // category query
-  // subcategory query
-  //   if (req.query.category) {
-  //   }
-  //   if (req.query.subcategory) {
-  //   }
-
   const brands = await Brand.find();
   return res.json({ success: true, brands });
 };

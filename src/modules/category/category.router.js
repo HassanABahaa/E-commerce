@@ -10,7 +10,6 @@ import subcategoryRouter from "../subcategory/subcategory.router.js";
 
 const router = Router();
 
-// localhost:3000/category
 router.use("/:category/subcategory", subcategoryRouter);
 
 // CRUD

@@ -18,25 +18,25 @@ const port = process.env.PORT;
 
 // CORS
 const whiteList = ["http://127.0.0.1:3000"];
-// app.use((req, res, next) => {
-//   console.log(req.header("origin"));
+app.use((req, res, next) => {
+  console.log(req.header("origin"));
 
-//   if (req.originalUrl.includes("/auth/activate_account")) {
-//     res.setHeader("Access-Control-Allow-Origin", "*");
-//     res.setHeader("Access-Control-Allow-Methods", "GET");
-//     return next();
-//   }
+  if (req.originalUrl.includes("/auth/activate_account")) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET");
+    return next();
+  }
 
-// if (!whiteList.includes(req.header("origin")))
-//   return next(new Error("Blocked by CORS!"));
+  if (!whiteList.includes(req.header("origin")))
+    return next(new Error("Blocked by CORS!"));
 
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Headers", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "*"); // "*" >> "POST"
-//   res.setHeader("Access-Control-Private-Network", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*"); 
+  res.setHeader("Access-Control-Private-Network", true);
 
-//   return next();
-// });
+  return next();
+});
 
 // morgan
 app.use(morgan("combined"));

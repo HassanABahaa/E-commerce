@@ -27,7 +27,6 @@ const orderSchema = new Schema(
       default: "placed",
       enum: ["placed", "shipped", "delivered", "canceled", "refunded"],
     },
-    // discription: { type: String, min: 10, max: 200 },
   },
   { timestamps: true }
 );

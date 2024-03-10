@@ -26,4 +26,12 @@ router.patch(
   asyncHandler(orderController.cancelOrder)
 );
 
+// webhook endpoint >>> from stripe
+
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  asyncHandler(orderController.orderWebhook)
+);
+
 export default router;

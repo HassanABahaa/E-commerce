@@ -5,6 +5,7 @@ import * as orderSchema from "./order.schema.js";
 import { validation } from "../../middleware/validation.middleware.js";
 import { isAuthenticated } from "../../middleware/authentication.middleware.js";
 import { isAuthorized } from "../../middleware/authorization.middleware.js";
+import express from "express";
 
 const router = Router();
 
@@ -30,7 +31,7 @@ router.patch(
 
 router.post(
   "/webhook",
-  express.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }), // req.body >>> buffer data
   asyncHandler(orderController.orderWebhook)
 );
 

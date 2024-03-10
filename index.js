@@ -11,35 +11,44 @@ import orderRouter from "./src/modules/order/order.router.js";
 import reviewRouter from "./src/modules/review/review.router.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
 // CORS
-const whiteList = ["http://127.0.0.1:3000"];
-app.use((req, res, next) => {
-  console.log(req.header("origin"));
+// const whiteList = ["http://127.0.0.1:5500"];
+// app.use((req, res, next) => {
+//   console.log(req.header("origin"));
 
-  if (req.originalUrl.includes("/auth/activate_account")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET");
+//   if (req.originalUrl.includes("/auth/activate_account")) {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader("Access-Control-Allow-Methods", "GET");
+//     return next();
+//   }
+
+//   if (!whiteList.includes(req.header("origin"))) {
+//     return next(new Error("Blocked by CORS!"));
+//   }
+
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Headers", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "*"); // "*" >> "POST"
+//   res.setHeader("Access-Control-Allow-Methods", "*");
+//   res.setHeader("Access-Control-Private-Network", true);
+
+//   return next();
+// });
+
+app.use(cors()); // allow access from everywhere
+
+// global middleware
+app.use((req, res, next) => {
+  if (req.originalUrl === "/order/webhook") {
     return next();
   }
-
-  if (!whiteList.includes(req.header("origin")))
-    return next(new Error("Blocked by CORS!"));
-
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-<<<<<<< HEAD
-  res.setHeader("Access-Control-Allow-Methods", "*"); // "*" >> "POST"
-=======
-  res.setHeader("Access-Control-Allow-Methods", "*"); 
->>>>>>> 165138b5979433025d7a5a107e0736a7823afcdc
-  res.setHeader("Access-Control-Private-Network", true);
-
-  return next();
+  express.json()(req, res, next);
 });
 
 // morgan

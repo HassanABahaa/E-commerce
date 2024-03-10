@@ -43,8 +43,6 @@ export const updateSubcategory = async (req, res, next) => {
   if (!subcategory)
     return next(new Error("Subcategory not found!", { cause: 404 }));
 
-  // check if category is the parent of subcategory (هنا او في الكوندشن بتاع السبكاتيجوري)
-
   // check usbcategory owner
   if (req.user._id.toString() !== subcategory.createdBy.toString())
     return next(new Error("Not allowed to update subcategory!"));
@@ -82,9 +80,6 @@ export const deleteSubcategory = async (req, res, next) => {
   if (subcategory.createdBy.toString() !== req.user._id.toString())
     return next(new Error("Not allowed to delete!"));
 
-  // delete subcategory from DB
-  // await subcategory.remove(); // hooks mongoose
-  // await subcategory.deleteOne();
   await Subcategory.findOneAndDelete(req.params.id);
 
   // delete image from cloudinary

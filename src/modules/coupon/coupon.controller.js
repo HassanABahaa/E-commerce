@@ -3,7 +3,7 @@ import { Coupon } from "../../../DB/models/coupon.model.js";
 
 export const createCoupon = async (req, res, next) => {
   // generate code
-  const code = voucher_code.generate({ length: 5 }); // ["123sd"]
+  const code = voucher_code.generate({ length: 5 }); 
   // create coupon in DB
   const coupon = await Coupon.create({
     name: code[0],

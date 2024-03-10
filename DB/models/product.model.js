@@ -35,10 +35,6 @@ const productSchema = new Schema(
 
 // virtuals
 productSchema.virtual("finalPrice").get(function () {
-  // this >>> document  / return >> final price
-  // final price
-  // if (this.discount > 0) return this.price - (this.price * this.discount) / 100;
-  // return this.price;
   return Number.parseFloat(
     this.price - (this.price * this.discount || 0) / 100
   ).toFixed(2);
@@ -54,22 +50,15 @@ productSchema.virtual("review", {
 
 // paginate
 productSchema.query.paginate = function (page) {
-  // this >>> query
-  // paginate  >>> 2 methods 1- skip 2- limit
-  // page from query , limit 20 (static) , skip?
-
   page = page < 1 || isNaN(page) || !page ? 1 : page;
 
-  const limit = 20; // 1 item per page
-
-  // // page 3 >>> 1 per page >>> skip 2 items
-  const skip = limit * (page - 1); // 1*(1-1)
-  return this.skip(skip).limit(limit); // this =Product.find({...req.query}).sort(sort)
+  const limit = 20;
+  const skip = limit * (page - 1);
+  return this.skip(skip).limit(limit);
 };
 
 // search
 productSchema.query.search = function (keyword) {
-  // this >> query
   if (keyword) {
     return this.find({
       $or: [
@@ -78,12 +67,11 @@ productSchema.query.search = function (keyword) {
       ],
     });
   }
-  return this; // query
+  return this;
 };
 
 // methods
 productSchema.methods.inStock = function (requiredQuantity) {
-  // this >>> document >>> products
   return this.availableItems >= requiredQuantity ? true : false;
 };
 

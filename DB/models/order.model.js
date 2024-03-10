@@ -35,7 +35,6 @@ const orderSchema = new Schema(
         "failed to pay",
       ],
     },
-    // discription: { type: String, min: 10, max: 200 },
   },
   { timestamps: true }
 );

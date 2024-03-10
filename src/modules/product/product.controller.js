@@ -70,7 +70,6 @@ export const deleteProduct = async (req, res, next) => {
   // delete images
   const ids = product.images.map((image) => image.id);
   ids.push(product.defaultImage.id);
-  // console.log(ids);
 
   await cloudinary.api.delete_resources(ids);
 
@@ -91,20 +90,7 @@ export const allProducts = async (req, res, next) => {
     return next(new Error("Brand not found!", { cause: 404 }));
   if (subcategory && !(await Subcategory.findById(subcategory)))
     return next(new Error("Subcategory not found!", { cause: 404 }));
-  // search , filter , sort , pagination >>> query
 
-  // search
-  // const results = await Product.find({
-  //   name: { $regex: keyword, $options: "i" },
-  // });
-
-  // filter
-  // const results = await Product.find({ ...req.query });
-
-  // sort
-  // const results = await Product.find({}).sort(sort);
-
-  ////////////////////////////////////////////////
   // sort paginate filter search
   const results = await Product.find({ ...req.query })
     .sort(sort)

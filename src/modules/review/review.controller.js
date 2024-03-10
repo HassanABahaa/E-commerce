@@ -36,7 +36,7 @@ export const addReview = async (req, res, next) => {
   });
 
   // calculate average rate
-  let calcRating = 0; // product , n reviews
+  let calcRating = 0;
   const product = await Product.findById(productId);
   const reviews = await Review.find({ productId });
 
@@ -64,7 +64,7 @@ export const updateReview = async (req, res, next) => {
   );
   if (req.body.rating) {
     // calculate average rate
-    let calcRating = 0; // product , n reviews
+    let calcRating = 0;
     const product = await Product.findById(productId);
     const reviews = await Review.find({ productId });
 

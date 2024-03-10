@@ -32,7 +32,11 @@ app.use((req, res, next) => {
 
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
+<<<<<<< HEAD
   res.setHeader("Access-Control-Allow-Methods", "*"); // "*" >> "POST"
+=======
+  res.setHeader("Access-Control-Allow-Methods", "*"); 
+>>>>>>> 165138b5979433025d7a5a107e0736a7823afcdc
   res.setHeader("Access-Control-Private-Network", true);
 
   return next();

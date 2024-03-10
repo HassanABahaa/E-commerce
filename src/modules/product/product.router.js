@@ -18,8 +18,7 @@ router.post(
   isAuthenticated,
   isAuthorized("seller"),
   fileUpload().fields([
-    // req.files >> object
-    { name: "defaultImage", maxCount: 1 }, // array
+    { name: "defaultImage", maxCount: 1 },
     { name: "subImages", maxCount: 3 },
   ]),
   validation(productSchema.createProduct),

@@ -9,7 +9,6 @@ import * as subcategoryController from "./subcategory.controller.js";
 
 const router = Router({ mergeParams: true });
 
-// http://localhost:3000/category/:categoryId/subcategory
 // CRUD
 
 // create category
